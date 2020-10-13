@@ -1,0 +1,131 @@
+<style>
+    .profile-avatar-container {
+        position: relative;
+        width: 100px;
+        margin: 0 auto;
+    }
+
+    .profile-avatar-container .profile-user-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-avatar-container .profile-avatar-text {
+        display: none;
+    }
+
+    .profile-avatar-container:hover .profile-avatar-text {
+        display: block;
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        background: #444;
+        opacity: .6;
+        color: #fff;
+        top: 0;
+        left: 0;
+        line-height: 100px;
+        text-align: center;
+    }
+
+    .profile-avatar-container button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+</style>
+<div class="row animated fadeInRight">
+    <div class="col-md-4">
+        <div class="box box-success">
+            <div class="panel-heading">
+                {:__('Profile')}
+            </div>
+            <div class="panel-body">
+
+                <form id="update-form" role="form" data-toggle="validator" method="POST" action="{:url('general.shprofile/update')}">
+                    {:token()}
+                    <input type="hidden" id="c-avatar" name="row[avatar]" value="{$merchant.avatar|htmlentities}"/>
+                    <div class="box-body box-profile">
+
+                        <div class="profile-avatar-container">
+                            <img class="profile-user-img img-responsive img-circle plupload" src="{$merchant.avatar|cdnurl|htmlentities}" alt="">
+                            <div class="profile-avatar-text img-circle">{:__('Click to edit')}</div>
+                            <button id="plupload-avatar" class="plupload" data-input-id="c-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button>
+                        </div>
+
+                        <h3 class="profile-username text-center">{$merchant.username|htmlentities}</h3>
+
+                        <p class="text-muted text-center">{$merchant.email|htmlentities}</p>
+                        <div class="form-group">
+                            <label for="username" class="control-label">{:__('Username')}:</label>
+                            <input type="text" class="form-control" id="username" name="row[username]" value="{$merchant.username|htmlentities}" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="money" class="control-label">{:__('余额')}:</label>
+                            <input type="text" class="form-control" id="money" name="row[money]" value="{$sh_money|htmlentities}" disabled/>
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="email" class="control-label">{:__('Email')}:</label>
+                            <input type="text" class="form-control" id="email" name="row[email]" value="{$merchant.email|htmlentities}" data-rule="required;email"/>
+                        </div>-->
+                        <div class="form-group">
+                            <label for="nickname" class="control-label">{:__('Nickname')}:</label>
+                            <input type="text" class="form-control" id="nickname" name="row[nickname]" value="{$merchant.nickname|htmlentities}" data-rule="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="control-label">{:__('登入密码')}:</label>
+                            <input type="password" class="form-control" id="password" placeholder="{:__('Leave password blank if dont want to change')}" autocomplete="new-password" name="row[password]" value="" data-rule="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="oldpassword" class="control-label">{:__('原登入密码')}:</label>
+                            <input type="password" class="form-control" id="oldpassword" placeholder="{:__('不修改密码请留空')}" autocomplete="new-oldpassword" name="row[oldpassword]" value="" data-rule="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pay_password" class="control-label">{:__('支付密码')}:</label>
+                            <input type="password" class="form-control" id="pay_password" placeholder="{:__('不修改支付密码请留空')}" autocomplete="new-pay_password" name="row[pay_password]" value="" data-rule="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pay_oldpassword" class="control-label">{:__('原支付密码')}:</label>
+                            <input type="password" class="form-control" id="pay_oldpassword" placeholder="{:__('不修改支付密码请留空')}" autocomplete="new-pay_oldpassword" name="row[pay_oldpassword]" value="" data-rule="password"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">{:__('Submit')}</button>
+                            <button type="reset" class="btn btn-default">{:__('Reset')}</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="col-md-8">
+        <div class="panel panel-default panel-intro panel-nav">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list"></i> {:__('Admin log')}</a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="one">
+                        <div class="widget-body no-padding">
+                            <div id="toolbar" class="toolbar">
+                                {:build_toolbar('refresh')}
+                            </div>
+                            <table id="table" class="table table-striped table-bordered table-hover" width="100%">
+
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>-->
+</div>
